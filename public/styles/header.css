@@ -1,0 +1,14 @@
+body > header {
+  margin-top: 120px;
+  display: flex;
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dc9a20;
+  background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+}
+
+.user-name {
+  color: white;
+}
