@@ -31,7 +31,7 @@
 }
 
 #submit {  
-  background-color: #4056a1;
+  background-color: #14453d;
   font-size: 1em;
   color: #ffffff;
   border: 0;
@@ -40,7 +40,7 @@
 }
 
 #submit:hover {  
-  background-color: rgb(31, 122, 241)
+  background-color: #3d7068
 }
 
 .invalid {
