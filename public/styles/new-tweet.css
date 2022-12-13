@@ -2,8 +2,9 @@
   display:flex;
   flex-direction: column;
   width: 80%;
-  background-color:#f4f1ec;
+  background-color:#43c59e;
   font-family: sans-serif;
+  color: white;
 }
 
 #new-tweet-form {
@@ -12,11 +13,13 @@
 }
 
 #tweet-text {
-  background-color: #f4f1ec;
+  background-color: #43c59e;
   border: hidden;
   border-bottom: 3px solid black;
   margin-bottom: 5px;
 }
+
+
 
 .new-tweet-footer {
   display: flex;
