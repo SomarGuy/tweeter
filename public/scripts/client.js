@@ -10,30 +10,10 @@
   //Renders the tweet data by appending tweet html to #tweet-container form element"
 // Fake data taken from initial-tweets.json
 $(document).ready(function() {
-  const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png"
-        ,
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    }
-  ]
+  $('form').submit(function(event) {
+    event.preventDefault();
+  });
+  const data = []
   
   const renderTweets = function(tweets) {
     $('#tweets-container').empty()
@@ -69,5 +49,21 @@ $(document).ready(function() {
       return $tweet;
   }
   renderTweets(data);
+
+  const loadTweets = function() {
+    $.get("/tweets/", function(newTweet) {
+      renderTweets(newTweet.reverse());
+    });
+  };
+
+  loadTweets();
+
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const formData = $(this).serialize();
+    $.ajax('/tweets', formData, function(response) {
+      console.log('Form data was sent to the server: ' + response);
+    });
+  });
 });
 
