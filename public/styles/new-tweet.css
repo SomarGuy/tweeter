@@ -4,7 +4,7 @@
   width: 80%;
   background-color:#43c59e;
   font-family: sans-serif;
-  color: white;
+  color: #53554c;
 }
 
 #new-tweet-form {
@@ -19,7 +19,9 @@
   margin-bottom: 5px;
 }
 
-
+textarea {
+  outline: none;
+}
 
 .new-tweet-footer {
   display: flex;
@@ -45,4 +47,24 @@
 
 .invalid {
   color: red
+}
+
+.error-message-box {
+  display: flex;
+  border: 3px solid #14453d;
+  color: #14453d;
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-top: -10px;
+  font-size: 20px;
+  font-family: sans-serif;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.fa-hexagon-triangle {
+margin-left: 5px;
+margin-right: 5px;
 }

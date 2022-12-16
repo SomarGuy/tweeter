@@ -10,9 +10,13 @@
   //Renders the tweet data by appending tweet html to #tweet-container form element"
 // Fake data taken from initial-tweets.json
 $(document).ready(function() {
+  $("#error-message-empty").hide();
+  $("#error-message-tooLong").hide();
+
   $('form').submit(function(event) {
     event.preventDefault();
   });
+
   const data = []
   
   const renderTweets = function(tweets) {
@@ -38,7 +42,7 @@ $(document).ready(function() {
             ${tweetData['content'].text}
           </div>
           <footer class="tweet-footer">
-            <span class="tweet-date">${tweetData['created_at']}</span>
+            <span class="tweet-date">${timeago.format(tweetData['created_at'])}</span>
             <div class="tweet-response">
               <i class="fas fa-flag"></i>
               <i class="fas fa-retweet"></i>
@@ -48,10 +52,9 @@ $(document).ready(function() {
         </article>`);
       return $tweet;
   }
-  renderTweets(data);
 
   const loadTweets = function() {
-    $.get("/tweets/", function(newTweet) {
+    $.ajax("/tweets", function(newTweet) {
       renderTweets(newTweet.reverse());
     });
   };
@@ -60,10 +63,22 @@ $(document).ready(function() {
 
   $('form').submit(function(event) {
     event.preventDefault();
+    const maxChar = 140;
+    const inputLength = $(this).find("#tweet-text").val().length;
     const formData = $(this).serialize();
-    $.ajax('/tweets', formData, function(response) {
-      console.log('Form data was sent to the server: ' + response);
-    });
+    $("#error-message-empty").slideUp("slow");
+    $("#error-message-tooLong").slideUp("slow");
+    if (!inputLength) {
+      $("#error-message-empty").slideDown("slow");
+      $("#error-message-tooLong").hide();
+    } else if (inputLength - maxChar > 0) {
+      $("#error-message-tooLong").slideDown("slow");
+      $("#error-message-empty").hide();
+    } else {
+      $.ajax('/tweets', formData, function(response) {
+        console.log('Form data was sent to the server: ' + response);
+      });
+    }
   });
 });
 

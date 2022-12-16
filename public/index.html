@@ -47,6 +47,16 @@
     <main class="container">
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
+        <span id="error-message-empty" class="error-message-box">
+          <i class="fas fa-exclamation-triangle"></i>
+          Please enter text before submitting a new Tweet!
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+        <span id="error-message-tooLong" class="error-message-box">
+          <i class="fas fa-exclamation-triangle"></i>
+          Please reduce your tweent content to less than or equal to 140 characters!
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
         <form action="/tweets" method="POST" id="new-tweet-form">
           <textarea name="text" id="tweet-text" placeholder="What are you humming about?"></textarea>
           <div class="new-tweet-footer">
