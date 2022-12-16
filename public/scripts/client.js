@@ -12,21 +12,6 @@
 $(document).ready(function() {
   $("#error-message-empty").hide();
   $("#error-message-tooLong").hide();
-
-  $('form').submit(function(event) {
-    event.preventDefault();
-  });
-
-  const data = []
-  
-  const renderTweets = function(tweets) {
-    $('#tweets-container').empty()
-    for (let tweet of tweets) {
-      const $tweet = createTweetElement(tweet);
-      $('#tweets-container').append($tweet);
-    }
-  };
-  
   const createTweetElement = function(tweetData) {
     let $tweet = $(`<article class="tweet">
           <header class="tweet-header">
@@ -51,16 +36,26 @@ $(document).ready(function() {
           </footer>
         </article>`);
       return $tweet;
-  }
-
-  const loadTweets = function() {
-    $.ajax("/tweets", function(newTweet) {
-      renderTweets(newTweet.reverse());
-    });
   };
 
-  loadTweets();
+  const renderTweets = function(tweets) {
+    $('#tweets-container').empty()
+    for (let tweet of tweets) {
+      const $tweet = createTweetElement(tweet);
+      $('#tweets-container').append($tweet);
+    }
+  };
 
+  const loadTweets = function() {
+    $.ajax({
+      url: "/tweets",
+      method: "GET",
+    })
+    .then(data => {
+      renderTweets(data)
+    })
+  };
+  
   $('form').submit(function(event) {
     event.preventDefault();
     const maxChar = 140;
@@ -75,10 +70,16 @@ $(document).ready(function() {
       $("#error-message-tooLong").slideDown("slow");
       $("#error-message-empty").hide();
     } else {
-      $.ajax('/tweets', formData, function(response) {
-        console.log('Form data was sent to the server: ' + response);
-      });
+      $.ajax({
+        url: "/tweets",
+        method: "POST",
+        data: $('form').serialize()
+      })
+      .then(loadTweets)
+      $(this).children().find('textarea').val('');
+      $('.counter').text(140);
     }
   });
+  loadTweets();
 });
 
