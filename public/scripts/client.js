@@ -25,15 +25,15 @@ const escape = function(str) {
     let $tweet = $(`<article class="tweet">
           <header class="tweet-header">
             <div class="user-profile">
-              <img class="user-icon" src="${tweetData['user'].avatars}"></img> 
-              <h4 class="user-name">${tweetData['user'].name}</h4>
+              <img class="user-icon" src="${escape(tweetData.user.avatars)}"></img> 
+              <h4 class="user-name">${escape(tweetData.user.name)}</h4>
             </div>
             <div>
-              <h4 class="user-handle">${tweetData['user'].handle}</h4>
+              <h4 class="user-handle">${escape(tweetData.user.handle)}</h4>
             </div>
           </header>
           <div class="tweet-text">
-            ${tweetData['content'].text}
+            ${escape(tweetData.content.text)}
           </div>
           <footer class="tweet-footer">
             <span class="tweet-date">${timeago.format(tweetData['created_at'])}</span>
