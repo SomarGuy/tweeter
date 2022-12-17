@@ -19,31 +19,33 @@ $(document).ready(function() {
   };
 
   //takes a tweet object as input and returns an HTML element representing the tweet. The HTML element is constructed using a template string and the properties of the tweet object, such as the user's name and the tweet text.
-  const createTweetElement = function(tweetData) {
-    let $tweet = $(`<article class="tweet">
-          <header class="tweet-header">
-            <div class="user-profile">
-              <img class="user-icon" src="${escape(tweetData.user.avatars)}"></img> 
-              <h4 class="user-name">${escape(tweetData.user.name)}</h4>
-            </div>
-            <div>
-              <h4 class="user-handle">${escape(tweetData.user.handle)}</h4>
-            </div>
-          </header>
-          <div class="tweet-text">
-            ${escape(tweetData.content.text)}
+  const createTweetElement = tweetData => {
+    const { user, content } = tweetData;
+    const $tweet = $(`
+      <article class="tweet">
+        <header class="tweet-header">
+          <div class="user-profile">
+            <img class="user-icon" src="${escape(user.avatars)}">
+            <h4 class="user-name">${escape(user.name)}</h4>
           </div>
-          <footer class="tweet-footer">
-            <span class="tweet-date">${timeago.format(tweetData['created_at'])}</span>
-            <div class="tweet-response">
-              <i class="fas fa-flag"></i>
-              <i class="fas fa-retweet"></i>
-              <i class="fas fa-heart"></i>
-            </div>
-          </footer>
-        </article>`);
+          <div>
+            <h4 class="user-handle">${escape(user.handle)}</h4>
+          </div>
+        </header>
+        <div class="tweet-text">${escape(content.text)}</div>
+        <footer class="tweet-footer">
+          <span class="tweet-date">${timeago.format(tweetData['created_at'])}</span>
+          <div class="tweet-response">
+            <i class="fas fa-flag"></i>
+            <i class="fas fa-retweet"></i>
+            <i class="fas fa-heart"></i>
+          </div>
+        </footer>
+      </article>
+    `);
     return $tweet;
   };
+  
 
 //takes an array of tweet objects as input and renders them to the page by appending each tweet's HTML element to a container element on the page.
 const renderTweets = tweets => {
@@ -58,29 +60,32 @@ const renderTweets = tweets => {
 
 
   //makes an AJAX GET request to the server to retrieve a list of tweets, and then passes the retrieved data to the renderTweets function to display the tweets on the page.
-  const loadTweets = function() {
+  const loadTweets = () => {
     $.ajax({
-      url: "/tweets",
-      method: "GET",
-    })
-      .then(data => {
-        renderTweets(data);
-      });
+      url: '/tweets',
+      method: 'GET',
+    }).then(renderTweets);
   };
+  
 
   //Adds new tweet when clicking submit
   $('form').submit(function(event) {
     event.preventDefault();
     const maxChar = 140;
-    const inputLength = $(this).find("#tweet-text").val().length;
-    $("#error-message-empty").slideUp("slow");
-    $("#error-message-tooLong").slideUp("slow");
+    const input = $(this).find("#tweet-text").val();
+    const inputLength = input.length;
+    const errorEmpty = $("#error-message-empty");
+    const errorTooLong = $("#error-message-tooLong");
+  
+    errorEmpty.slideUp("slow");
+    errorTooLong.slideUp("slow");
+  
     if (!inputLength) {
-      $("#error-message-empty").slideDown("slow");
-      $("#error-message-tooLong").hide();
+      errorEmpty.slideDown("slow");
+      errorTooLong.hide();
     } else if (inputLength - maxChar > 0) {
-      $("#error-message-tooLong").slideDown("slow");
-      $("#error-message-empty").hide();
+      errorTooLong.slideDown("slow");
+      errorEmpty.hide();
     } else {
       $.ajax({
         url: "/tweets",
