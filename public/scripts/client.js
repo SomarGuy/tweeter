@@ -10,8 +10,17 @@
   //Renders the tweet data by appending tweet html to #tweet-container form element"
 // Fake data taken from initial-tweets.json
 $(document).ready(function() {
+
   $("#error-message-empty").hide();
   $("#error-message-tooLong").hide();
+
+  //escape function for safe user input
+const escape = function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
   const createTweetElement = function(tweetData) {
     let $tweet = $(`<article class="tweet">
           <header class="tweet-header">
