@@ -2,7 +2,7 @@
   display:flex;
   flex-direction: column;
   width: 80%;
-  background-color:#43c59e;
+  background-color:#9AC791;
   font-family: sans-serif;
   color: #53554c;
 }
@@ -13,7 +13,7 @@
 }
 
 #tweet-text {
-  background-color: #43c59e;
+  background-color: #9AC791;
   border: hidden;
   border-bottom: 3px solid #53554c;
   margin-bottom: 5px;
@@ -33,7 +33,7 @@ textarea {
 }
 
 #submit {  
-  background-color: #14453d;
+  background-color: #8ABD91;
   font-size: 1em;
   color: #ffffff;
   border: 0;
@@ -42,7 +42,7 @@ textarea {
 }
 
 #submit:hover {  
-  background-color: #3d7068
+  background-color: #A9BD93;
 }
 
 .invalid {

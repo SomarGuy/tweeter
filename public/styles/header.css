@@ -1,11 +1,11 @@
 body > header {
-  margin-top: 120px;
+  margin-top: 150px;
   display: flex;
   height: 400px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #3d7068;
+  background-color: #8ABD91;
   background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
 }
 

@@ -15,8 +15,10 @@ html {
  */
 
 body {
+  display: flex;
+  flex-direction: column;
   color: #545149;
-  background-color: #43c59e;
+  background-color: #9AC791  ;
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -26,11 +28,46 @@ main {
   font-size: 15px;
   width: 90%;
   flex-direction: column;
-  background-color: #43c59e;
+  background-color: #9AC791  ;
   font-family: sans-serif;
   align-items: center;
   margin-right: auto;
   margin-left: auto;
+}
+
+@media (min-width: 1024px) {
+  body {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  body > header {
+    width: 33%;
+    margin: 220px 0px 0px 3rem;
+  }
+  .container {
+    width: 55%;
+    float: right;
+    margin: 200px 3rem 0px 0px;
+  }
+}
+
+@media (max-width: 1024px) {
+  nav {
+    background-color: #C0C791    ;
+    height: 90px;
+  }
+  body > header {
+    margin-top: 90px;
+  }
+}
+
+@media (max-width: 570px) {
+  nav > span {
+    font-size: 2rem;
+  }
+  .writeTweet {
+    font-size: 1rem;
+  }
 }
 
 /*
