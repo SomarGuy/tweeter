@@ -55,6 +55,7 @@ main {
   nav {
     background-color: #C0C791    ;
     height: 90px;
+    background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
   }
   body > header {
     margin-top: 90px;

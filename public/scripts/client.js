@@ -54,8 +54,10 @@ const renderTweets = tweets => {
 
   tweets.forEach(tweet => {
     const $tweet = createTweetElement(tweet);
-    $tweetsContainer.append($tweet);
+    $tweetsContainer.prepend($tweet);
   });
+
+  $('#tweet-text').val('');
 };
 
 
@@ -67,7 +69,6 @@ const renderTweets = tweets => {
     }).then(renderTweets);
   };
   
-
   //Adds new tweet when clicking submit
   $('form').submit(function(event) {
     event.preventDefault();
